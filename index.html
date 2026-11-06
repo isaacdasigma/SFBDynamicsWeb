@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SFB Dynamics | Hardware Radio & Audio Platform</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #0284c7;
+      --accent: #38bdf8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px 16px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px 30px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo-frame {
+      margin-bottom: 24px;
+    }
+
+    .logo-frame img {
+      max-width: 280px;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.25);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      letter-spacing: -0.5px;
+      color: var(--text);
+    }
+
+    p.subtitle {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-top: 8px;
+    }
+
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: rgba(2, 132, 199, 0.15);
+      color: var(--accent);
+      border: 1px solid var(--primary);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 28px 0;
+    }
+
+    h2 {
+      color: var(--accent);
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .grid-item {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: 8px;
+    }
+
+    .grid-item h3 {
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .grid-item p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Web Audio Synthesizer Simulator Panel */
+    .synth-panel {
+      text-align: center;
+      padding: 24px;
+      background: #090d16;
+      border-radius: 10px;
+      border: 1px solid var(--primary);
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: #0369a1;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--border);
+      color: var(--text);
+    }
+
+    #status {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-mono: monospace;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 30px 0;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="logo-frame">
+        <!-- Save your downloaded logo image in your repo as 'logo.jpg' or 'logo.png' -->
+        <img src="logo.jpg" alt="SFB Dynamics Logo" onerror="this.src='logo.png'">
+      </div>
+      <h1>SFB DYNAMICS</h1>
+      <p class="subtitle">Micro-Scale RF Carrier Generation & Hardware Audio Synthesis</p>
+      
+      <div class="badge-row">
+        <span class="badge">RP2040 Powered</span>
+        <span class="badge">600 kHz AM Carrier</span>
+        <span class="badge">Polyphonic Audio</span>
+        <span class="badge">Proprietary IP</span>
+      </div>
+    </header>
+
+    <!-- Platform Overview Section -->
+    <section class="card">
+      <h2>Architecture Specifications</h2>
+      <p style="color: var(--muted);">
+        SFB Dynamics develops compact hardware platforms combining real-time polyphonic audio synthesis with precision low-power RF broadcast capabilities.
+      </p>
+
+      <div class="grid">
+        <div class="grid-item">
+          <h3>Dual-Core Processor</h3>
+          <p>ARM Cortex-M0+ architecture configured for low-latency MIDI signal routing.</p>
+        </div>
+        <div class="grid-item">
+          <h3>RF Subsystem</h3>
+          <p>Hardware PWM output configured for medium-wave broadcast band testing (GP14).</p>
+        </div>
+        <div class="grid-item">
+          <h3>Synthesis Subsystem</h3>
+          <p>16-patch algorithmic sound engine with hardware RC output filtering (GP16).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Web Audio Beacon Simulator -->
+    <section class="card">
+      <h2>Live Signal Simulator</h2>
+      <p style="color: var(--muted); margin-bottom: 16px;">
+        Test an interactive web simulation of the SFB dual-tone AM synth signal directly in your browser:
+      </p>
+
+      <div class="synth-panel">
+        <div class="controls">
+          <button class="btn" onclick="playBeaconTone()">🔊 Trigger Beacon Signal</button>
+          <button class="btn btn-secondary" onclick="stopBeaconTone()">⏹ Stop Signal</button>
+        </div>
+        <div id="status">Signal Generator: Idle</div>
+      </div>
+    </section>
+
+    <!-- Legal & IP Footer -->
+    <footer>
+      <p>© 2026 <strong>SFB Dynamics</strong>. All Rights Reserved.</p>
+      <p style="margin-top: 6px; font-size: 0.8rem;">
+        Hardware architecture and firmware implementations are proprietary. Public disclosure of detailed schematics and binaries is restricted pending formal patent review.
+      </p>
+    </footer>
+  </div>
+
+  <!-- Interactive Web Audio API Script -->
+  <script>
+    let audioCtx = null;
+    let osc1 = null;
+    let osc2 = null;
+    let gainNode = null;
+
+    function playBeaconTone() {
+      if (audioCtx && audioCtx.state === 'running') {
+        stopBeaconTone();
+      }
+
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+      // Audio Oscillator (Base Synth Tone)
+      osc1 = audioCtx.createOscillator();
+      osc1.type = 'sawtooth';
+      osc1.frequency.setValueAtTime(440, audioCtx.currentTime); // A4 Note
+
+      // Sub-Oscillator (Pulse Modulation Simulation)
+      osc2 = audioCtx.createOscillator();
+      osc2.type = 'square';
+      osc2.frequency.setValueAtTime(880, audioCtx.currentTime); // Octave Up
+
+      gainNode = audioCtx.createGain();
+      gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+
+      osc1.connect(gainNode);
+      osc2.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+
+      osc1.start();
+      osc2.start();
+
+      document.getElementById('status').innerText = 'Signal Generator: BROADCASTING (440Hz / 880Hz Dual-Tone)';
+      document.getElementById('status').style.color = '#38bdf8';
+    }
+
+    function stopBeaconTone() {
+      if (osc1) { osc1.stop(); osc1.disconnect(); }
+      if (osc2) { osc2.stop(); osc2.disconnect(); }
+      if (audioCtx) { audioCtx.close(); }
+
+      document.getElementById('status').innerText = 'Signal Generator: Idle';
+      document.getElementById('status').style.color = '#94a3b8';
+    }
+  </script>
+</body>
+</html>
